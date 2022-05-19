@@ -1,0 +1,80 @@
+<html>
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vis-network@latest/styles/vis-network.css" type="text/css" />
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/vis-network@latest/dist/vis-network.min.js"> </script>
+<center>
+<h1>md-graph example</h1>
+</center>
+
+<!-- <link rel="stylesheet" href="../node_modules/vis/dist/vis.min.css" type="text/css" />
+<script type="text/javascript" src="../node_modules/vis/dist/vis.js"> </script>-->
+
+<style type="text/css">
+
+        #mynetwork {
+            width: 100%;
+            height: 90%;
+            background-color: #2e2e2e;
+            border: 1px solid lightgray;
+            position: relative;
+            float: left;
+        }
+
+        
+
+        
+
+        
+</style>
+
+</head>
+
+<body>
+<div id = "mynetwork"></div>
+
+
+<script type="text/javascript">
+
+    // initialize global variables.
+    var edges;
+    var nodes;
+    var network; 
+    var container;
+    var options, data;
+
+    
+    // This method is responsible for drawing the graph, returns the drawn network
+    function drawGraph() {
+        var container = document.getElementById('mynetwork');
+        
+        
+
+        // parsing and collecting nodes and edges from the python
+        nodes = new vis.DataSet([{"font": {"color": "#ffffff"}, "id": 1, "label": "_Root", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 24, "label": "Chemistry", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 44, "label": "Physics", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 3, "label": "Computer Science", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 27, "label": "Mathematics", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 46, "label": "Engineering", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 26, "label": "Physical Chemistry", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 25, "label": "Solid State Chemistry", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 6, "label": "Algorithms", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 10, "label": "Computer Security", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 21, "label": "Mainframe", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 4, "label": "Operating Systems", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 12, "label": "Programming Languages", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 2, "label": "Quantum Computing", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 5, "label": "Theory of Computation", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 42, "label": "Applied Mathematics", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 33, "label": "Discrete Mathematics", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 40, "label": "Math of Change", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 31, "label": "Math of Logic", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 36, "label": "Math of Space", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 28, "label": "Math of Structure", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 50, "label": "Chemical Engineering", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 45, "label": "Computer Engineering", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 48, "label": "Electrical Engineering", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 49, "label": "Materials Engineering", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 47, "label": "Mechanical Engineering", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 20, "label": "Q#", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 7, "label": "SHA-256", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 8, "label": "Cryptography", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 11, "label": "Malware Analysis", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 9, "label": "Reverse Engineering", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 22, "label": "IBM z/OS", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 23, "label": "Punchcards", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 19, "label": "COBOL", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 13, "label": "Compilers", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 15, "label": "EBNF", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 14, "label": "Interpreters", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 18, "label": "C#", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 16, "label": "Go", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 17, "label": "Python", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 43, "label": "Statistics", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 32, "label": "Combinatorics", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 34, "label": "Graph Theory", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 39, "label": "Singlevariable Calculus", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 38, "label": "Multivariable Calculus", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 41, "label": "Differential Equations", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 30, "label": "Set Theory", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 35, "label": "Geometry", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 37, "label": "Trigonometry", "shape": "dot", "size": 10}, {"font": {"color": "#ffffff"}, "id": 29, "label": "Linear Algebra", "shape": "dot", "size": 10}]);
+        edges = new vis.DataSet([{"from": 1, "label": 1, "to": 24, "weight": 1}, {"from": 1, "label": 1, "to": 44, "weight": 1}, {"from": 1, "label": 1, "to": 3, "weight": 1}, {"from": 1, "label": 1, "to": 27, "weight": 1}, {"from": 1, "label": 1, "to": 46, "weight": 1}, {"from": 24, "label": 1, "to": 26, "weight": 1}, {"from": 24, "label": 1, "to": 25, "weight": 1}, {"from": 3, "label": 1, "to": 6, "weight": 1}, {"from": 3, "label": 1, "to": 10, "weight": 1}, {"from": 3, "label": 1, "to": 21, "weight": 1}, {"from": 3, "label": 1, "to": 4, "weight": 1}, {"from": 3, "label": 1, "to": 12, "weight": 1}, {"from": 3, "label": 1, "to": 2, "weight": 1}, {"from": 3, "label": 1, "to": 5, "weight": 1}, {"from": 27, "label": 1, "to": 42, "weight": 1}, {"from": 27, "label": 1, "to": 33, "weight": 1}, {"from": 27, "label": 1, "to": 40, "weight": 1}, {"from": 27, "label": 1, "to": 31, "weight": 1}, {"from": 27, "label": 1, "to": 36, "weight": 1}, {"from": 27, "label": 1, "to": 28, "weight": 1}, {"from": 46, "label": 1, "to": 50, "weight": 1}, {"from": 46, "label": 1, "to": 45, "weight": 1}, {"from": 46, "label": 1, "to": 48, "weight": 1}, {"from": 46, "label": 1, "to": 49, "weight": 1}, {"from": 46, "label": 1, "to": 47, "weight": 1}, {"from": 2, "label": 1, "to": 20, "weight": 1}, {"from": 20, "label": 1, "to": 12, "weight": 1}, {"from": 6, "label": 1, "to": 7, "weight": 1}, {"from": 10, "label": 1, "to": 8, "weight": 1}, {"from": 10, "label": 1, "to": 11, "weight": 1}, {"from": 10, "label": 1, "to": 9, "weight": 1}, {"from": 21, "label": 1, "to": 22, "weight": 1}, {"from": 21, "label": 1, "to": 23, "weight": 1}, {"from": 21, "label": 1, "to": 19, "weight": 1}, {"from": 12, "label": 1, "to": 13, "weight": 1}, {"from": 12, "label": 1, "to": 15, "weight": 1}, {"from": 12, "label": 1, "to": 14, "weight": 1}, {"from": 12, "label": 1, "to": 19, "weight": 1}, {"from": 12, "label": 1, "to": 18, "weight": 1}, {"from": 12, "label": 1, "to": 16, "weight": 1}, {"from": 12, "label": 1, "to": 17, "weight": 1}, {"from": 5, "label": 1, "to": 31, "weight": 1}, {"from": 8, "label": 1, "to": 33, "weight": 1}, {"from": 42, "label": 1, "to": 43, "weight": 1}, {"from": 33, "label": 1, "to": 32, "weight": 1}, {"from": 33, "label": 1, "to": 34, "weight": 1}, {"from": 40, "label": 1, "to": 39, "weight": 1}, {"from": 40, "label": 1, "to": 38, "weight": 1}, {"from": 40, "label": 1, "to": 41, "weight": 1}, {"from": 31, "label": 1, "to": 30, "weight": 1}, {"from": 36, "label": 1, "to": 35, "weight": 1}, {"from": 36, "label": 1, "to": 37, "weight": 1}, {"from": 28, "label": 1, "to": 29, "weight": 1}, {"from": 45, "label": 1, "to": 48, "weight": 1}, {"from": 50, "label": 1, "to": 49, "weight": 1}]);
+
+        // adding nodes and edges to the graph
+        data = {nodes: nodes, edges: edges};
+
+        var options = {"nodes": {"font": {"size": 32, "align": "middle"}, "scaling": {"min": 70, "max": 100}, "color": {"border": "rgba(151,153,153,1)", "background": "rgba(240,241,252,1)", "highlight": {"border": "rgba(94,212,103,1)", "background": "rgba(94,212,103,1)"}}, "size": 100}, "edges": {"color": {"inherit": true}, "smooth": false}, "physics": {"forceAtlas2Based": {"gravitationalConstant": -450, "springLength": 100, "avoidOverlap": 1}, "minVelocity": 0.75, "solver": "forceAtlas2Based", "timestep": 0.5}};
+        
+        
+
+        
+
+        network = new vis.Network(container, data, options);
+	 
+        
+
+
+        
+
+        return network;
+
+    }
+
+    drawGraph();
+
+</script>
+</body>
+</html>
